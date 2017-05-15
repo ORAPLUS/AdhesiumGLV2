@@ -1,0 +1,331 @@
+<!--main-container-part-->
+<div id="content" ng-init="getClients()">
+<!--breadcrumbs-->
+<div id="content-header">
+	<div id="breadcrumb">
+		<a ui-sref="accueil" title="Accueil" class="tip-bottom">
+			<i class="icon-home"></i> Accueil
+		</a> 
+		<a ui-sref="display_manage_clients" title="Ajouter un client" class="tip-bottom">
+			<i class="icon-plus"></i> Ajouter un client
+		</a>
+	</div>
+</div>
+<!--End-breadcrumbs-->
+<!--container-part-->
+	<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="widget-box">
+						<div class="widget-title bg_ly" data-toggle="collapse" href="#collapseOne">
+							<span class="icon"><i class="icon-star"></i></span>
+							<h5>Formulaire de traitement</h5>
+						</div>
+						<div class="widget-content nopadding in collapse" id="collapseOne">
+							<form name="myForm" class="form-horizontal" novalidate>
+								<input type="hidden" ng-model="client.idClient" /> 
+								<input type="hidden" ng-model="client.logo" />
+								<div class="control-group">
+									<label class="control-label">Logo</label>
+									<div class="controls">
+										<input type="file" ngf-select="ngf-select" ng-model="picFile"
+											name="file" accept="image/*" ngf-max-width="128" ngf-max-height="128" ngf-max-size="2MB"
+											ngf-pattern="'.jpeg,.jpg,.png,.gif'" ngf-model-invalid="errorFile" /> 
+											<br/>
+										<a ng-click="uploadPicAnnuler()" ng-show="picFile" class="btn btn-danger btn-mini">
+											<i class="icon-remove"></i>
+										</a>
+										<a ng-click="uploadPic(picFile)" class="btn btn-success btn-mini" id="uploadS">
+											<i class="icon-upload-alt"></i> Upload
+										</a>
+										<div class="uploadfilediv">
+											<img ngf-src="picFile?picFile:linkXampp+client.logo"  width="128" height="128" alt="logo" title="logo"/>
+										</div>
+										<span class="help-block" id="spanpx"> 
+											<i ng-show="myForm.file.$error.maxSize">* Taille max: 2MB</i> 
+											<i ng-show="myForm.file.$error.pattern">* Extensions autorisees: .jpeg,.jpg,.png,.gif</i> 
+											<i ng-show="myForm.file.$error.maxWidth">* Largeur max: 128px</i> 
+											<i ng-show="myForm.file.$error.maxHeight">* Hauteur max: 128px</i> 
+											<i>{{errorMsg}}</i>
+										</span>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">Nom
+										<span class="help-inline">*</span>
+									</label>
+									<div class="controls">
+										<input type="text" ng-model="client.nom" name="nom" id="nom" class="span4" required="required" /> 
+										<i ng-show="myForm.nom.$invalid &amp;&amp; !myForm.nom.$pristine" class="icon-question-sign"></i>
+										<span ng-show="myForm.nom.$invalid &amp;&amp; !myForm.nom.$pristine" class="help-inline"> 
+										Le champ nom est obligatoire. 
+										</span>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">Contacts
+									</label>
+								<div class="controls">
+									<a ng-click="showModalContact = !showModalContact" class="btn btn-success btn-mini">
+										<i class="icon-group"></i> Ajouter
+									</a>
+									     <div class="modal-backdrop in" ng-show="showModalContact"></div>
+										 <div id="myAlert" class="modal" ng-show="showModalContact">
+										  <div class="modal-header">
+										    <button data-dismiss="modal" class="close" type="button" ng-click="closeContact()">×</button>
+										    <h3><i class="icon-group"></i> Ajouter un contact</h3>
+										  </div>
+										  <div class="modal-body">
+											    <div class="control-group">
+													<label class="control-label">Nom et Prénom</label>
+													<div class="controls">
+														<input type="text" ng-model="contact.nom" name="nomContact" class="span10"/> 
+													</div>
+												</div>
+												<div class="control-group">
+													<label class="control-label">Tél Portable</label>
+													<div class="controls">
+														<input type="text" ng-model="contact.telPortable" name="telPortableContact" class="span10"/> 
+													</div>
+												</div>
+												<div class="control-group">
+													<label class="control-label">Tél Fixe</label>
+													<div class="controls">
+														<input type="text" ng-model="contact.telFixe" name="telFixeContact" class="span10"/> 
+													</div>
+												</div>
+												<div class="control-group">
+													<label class="control-label">Email</label>
+													<div class="controls">
+														<input type="text" ng-model="contact.email" name="emailContact" class="span10"/> 
+													</div>
+												</div>
+										  </div>
+										  <div class="modal-footer"> 
+										  	<input type="hidden" ng-model="indexContact" name="indexContact"/>
+											  <a data-dismiss="modal" class="btn btn-primary" ng-click="addContact()">
+											  	<i class="icon-save"></i> Valider</a> 
+											  <a data-dismiss="modal" class="btn" ng-click="nouveauContact()">
+											  	<i class="icon-repeat"></i> Annuler</a> 
+										  </div>
+										</div>
+										<div class="widget-content nopadding updates" id="tabContact">
+											 <table class="table table-striped table-bordered">
+											     <thead>
+											       <tr>
+											         <th>Nom et Prénom</th>
+											         <th>Tél Portable</th>
+											         <th>Tél Fixe</th>
+											         <th>Email</th>
+											         <th>Opts</th>
+											       </tr>
+											     </thead>
+											     <tbody>
+											       <tr ng-repeat="contact in contacts">
+											         <td class="taskDesc"><i class="icon-user"></i>{{contact.nom}}</td>
+											         <td class="taskStatus"><span class="in-progress">{{contact.telPortable}}</span></td>
+											         <td class="taskStatus"><span class="in-progress">{{contact.telFixe}}</span></td>
+											         <td class="taskStatus"><span class="in-progress">{{contact.email}}</span></td>
+											         <td class="taskOptions">
+												         <a ng-click="editerContact($index,contact)" class="tip-top" data-original-title="Update">
+												         	<i class="icon-edit"></i>
+												         </a> 
+												         <a ng-click="removeContact($index)" class="tip-top" data-original-title="Delete">
+												         	<i class="icon-remove"></i>
+												         </a>
+											         </td>
+											       </tr>
+											     </tbody>
+											 </table>
+										</div>
+									</div>
+								</div>
+         
+								<div class="control-group">
+									<label for="normal" class="control-label">Téléphone Portable</label>
+									<div class="controls">
+										<input type="text" ng-model="client.telPortable" name="telPortable" id="telPortable" class="span4" />
+									</div>
+								</div>
+								<div class="control-group">
+									<label for="normal" class="control-label">Téléphone Fixe</label>
+									<div class="controls">
+										<input type="text" ng-model="client.telFixe" name="tel_fix" id="tel_fix" class="span4" />
+									</div>
+								</div>
+								<div class="control-group">
+									<label for="normal" class="control-label">Email</label>
+									<div class="controls">
+										<input type="text" ng-model="client.email" name="email" id="email" class="span4" />
+									</div>
+								</div>
+
+								<div class="control-group">
+									<label for="normal" class="control-label">Remarque</label>
+									<div class="controls">
+										<textarea name="remarque" ng-model="client.remarque" id="remarque" class="span4"></textarea>
+									</div>
+								</div>
+								<div class="control-group">
+									<label for="normal" class="control-label">Commentaire</label>
+									<div class="controls">
+										<textarea name="commentaire" ng-model="client.commentaire" id="commentaire" class="span4"></textarea>
+									</div>
+								</div>
+								<div class="form-actions">
+									<button ng-disabled="!myForm.$valid" class="btn btn-primary" ng-click="sauvgarde()">
+										<i class="icon-save"></i> Valider
+									</button>
+									<a class="btn btn-inverse" ng-click="nouveau()"> 
+										<i class="icon-repeat"></i> Annuler
+									</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="widget-box">
+						<div class="widget-title bg_ly collapsed" data-toggle="collapse" href="#collapseTwo">
+							<span class="icon"><i class="icon-search"></i></span>
+							<h5>Rechercher</h5>
+						</div>
+						<div class="widget-content nopadding collapse" id="collapseTwo" style="height: 0px;">
+							<form class="form-horizontal">
+								<div class="control-group">
+									<label class="control-label">Nom</label>
+									<div class="controls">
+										<input type="text" ng-model="motCle" name="motCle" id="motCle" />
+									</div>
+								</div>
+								<div class="form-actions">
+									<button class="btn btn-primary" ng-click="getClients()">
+										<i class="icon-search"></i> Valider
+									</button>
+									<button class="btn btn-success" ng-click="nouveauSearch()">
+										<i class="icon-repeat"></i> Vider
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="widget-box">
+						<div class="widget-title bg_ly" data-toggle="collapse" href="#collapseThree">
+							<span class="icon"><i class="icon-th"></i></span>
+							<h5>Listes de données</h5>
+						</div>
+						<div class="widget-content nopadding in collapse" id="collapseThree">
+							<input type="hidden" ng-model="sortColumn" class="form-control" />
+							<input type="hidden" ng-model="sortOption" class="form-control" />
+							<div class="error_ex">
+								<div class="pagination alternate">
+									<ul class="nav nav-pills">
+										<li style="cursor: pointer;">
+											<a ng-click="gotoPage(0)">
+												<i class="icon-double-angle-left"></i>
+											</a>
+										</li>
+										<li style="cursor: pointer;">
+											<a ng-click="gotoPage(pageCourante-1)">
+												<i class="icon-angle-left"></i>
+											</a>
+										</li>
+										<li id="lilipage">
+											<div class="controls" id="divlipage">
+												<input id="lipage" type="text" ng-model="pageCouranteText" ng-keyup="gotoPage(pageCouranteText-1)" class="span6" />
+												sur {{totalPages}}
+											</div>
+										</li>
+										<li style="cursor: pointer;">
+											<a ng-click="gotoPage(pageCourante+1)">
+												<i class="icon-angle-right"></i>
+											</a>
+										</li>
+										<li style="cursor: pointer;">
+											<a ng-click="gotoPage(totalPages-1)"> 
+												<i class="icon-double-angle-right"></i>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<table class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th style="cursor: pointer;" ng-click="orderby('idClient')">
+											<i ng-class="{ 'icon-sort':sortColumn != 'idClient','icon-sort-up': (sortColumn == 'idClient' &amp;&amp; sortOption == 'DESC'), 'icon-sort-down' : (sortColumn == 'idClient' &amp;&amp; sortOption == 'ASC')}"></i> 
+											ID
+										</th>
+										<th>Logo</th>
+										<th style="cursor: pointer;" ng-click="orderby('nom')">
+											<i ng-class="{ 'icon-sort':sortColumn != 'nom','icon-sort-up': (sortColumn == 'nom' &amp;&amp; sortOption == 'DESC'), 'icon-sort-down' : (sortColumn == 'nom' &amp;&amp; sortOption == 'ASC')}">
+											</i> 
+											Nom
+										</th>
+										<th style="cursor: pointer;" ng-click="orderby('telPortable')">
+											<i ng-class="{ 'icon-sort':sortColumn != 'telPortable','icon-sort-up': (sortColumn == 'telPortable' &amp;&amp; sortOption == 'DESC'), 'icon-sort-down' : (sortColumn == 'telPortable' &amp;&amp; sortOption == 'ASC')}">
+											</i> 
+											Tél Portable
+										</th>
+										<th style="cursor: pointer;" ng-click="orderby('telFixe')">
+											<i ng-class="{ 'icon-sort':sortColumn != 'telFixe','icon-sort-up': (sortColumn == 'telFixe' &amp;&amp; sortOption == 'DESC'), 'icon-sort-down' : (sortColumn == 'telFixe' &amp;&amp; sortOption == 'ASC')}">
+											</i>
+											Tél Fixe
+										</th>
+										<th style="cursor: pointer;" ng-click="orderby('email')">
+											<i ng-class="{ 'icon-sort':sortColumn != 'email','icon-sort-up': (sortColumn == 'email' &amp;&amp; sortOption == 'DESC'), 'icon-sort-down' : (sortColumn == 'email' &amp;&amp; sortOption == 'ASC')}">
+											</i>
+											Email
+										</th>
+										<th style="cursor: pointer;" ng-click="orderby('remarque')">
+											<i ng-class="{ 'icon-sort':sortColumn != 'remarque','icon-sort-up': (sortColumn == 'remarque' &amp;&amp; sortOption == 'DESC'), 'icon-sort-down' : (sortColumn == 'remarque' &amp;&amp; sortOption == 'ASC')}"></i>
+											Remarque
+										</th>
+										<th style="cursor: pointer;" ng-click="orderby('commentaire')">
+											<i ng-class="{ 'icon-sort':sortColumn != 'commentaire','icon-sort-up': (sortColumn == 'commentaire' &amp;&amp; sortOption == 'DESC'), 'icon-sort-down' : (sortColumn == 'commentaire' &amp;&amp; sortOption == 'ASC')}">
+											</i>
+											Commentaire
+										</th>
+										<th>Opts</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="client in clients | orderBy:myorder">
+										<td>{{client.idClient}}</td>
+										<td class="taskOptions">
+											<img width="60" height="60" alt="{{client.nom}}" title="{{client.nom}}" ng:src="{{linkXampp}}{{client.logo}}" />
+										</td>
+										<td>{{client.nom}}</td>
+										<td>{{client.telPortable}}</td>
+										<td>{{client.telFixe}}</td>
+										<td>{{client.email}}</td>
+										<td>{{client.remarque}}</td>
+										<td>{{client.commentaire}}</td>
+										<td>
+											<a ng-click="editer(client)" class="btn btn-success btn-mini" data-original-title="Update">
+												<i class="icon-edit"></i>
+											</a> 
+											<a ng-click="supprimer(client)" class="btn btn-danger btn-mini" data-original-title="Delete">
+												<i class="icon-remove"></i>
+											</a>
+											<a ui-sref="display_details_client({ idClient: client.idClient})" class="btn btn-primary btn-mini" data-original-title="View">
+												<i class="icon-eye-open"></i>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+<!--end-container-part-->
+</div>
+<!--end-main-container-part-->

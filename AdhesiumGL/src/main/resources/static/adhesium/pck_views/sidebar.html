@@ -1,0 +1,117 @@
+<div id="sidebar">
+	<a href="#" class="visible-phone">
+		<i class="icon-th-list"></i> <span class="text">Menu</span> 
+	</a>
+	<ul class="ulsideBar">
+		<li ng-class="{'active':SideBarshow==1}">
+			<a ui-sref="accueil" ng-click="getSideBar(1)">
+				<i class="icon-home"></i> <span class="text">Accueil</span>
+			</a>
+		</li>
+		<li ng-class="{'active submenu open':SideBarshow==2}">
+			<a ng-click="getSideBar(2)" >
+				<i class="icon-briefcase"></i> <span class="text">Gestion des Clients</span>
+				<span class="label label-important">2</span>
+			</a>
+			<ul>
+				<li ng-class="{'active':SubSideBarshow==22}">
+					<a ui-sref="display_manage_clients" ng-click="getSubSideBar(2,22)">
+						<i class="icon-plus"></i> <span class="text">Ajouter un client</span>
+					</a>
+				</li>
+				<li ng-class="{'active':SubSideBarshow==222}">
+					<a ui-sref="display_details_client" ng-click="getSubSideBar(2,222)">
+						<i class="icon-tasks"></i> <span class="text">Détails du client</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li ng-class="{'active submenu open':SideBarshow==3}">
+			<a ng-click="getSideBar(3)" >
+				<i class="icon-group"></i> <span class="text">Gestion des Contacts</span>
+				<span class="label label-important">2</span>
+			</a>
+			<ul>
+				<li ng-class="{'active':SubSideBarshow==33}">
+					<a ui-sref="display_manage_contacts" ng-click="getSubSideBar(3,33)">
+						<i class="icon-plus"></i> <span class="text">Ajouter un contact</span>
+					</a>
+				</li>
+				<li ng-class="{'active':SubSideBarshow==333}">
+					<a ui-sref="display_details_contact" ng-click="getSubSideBar(3,333)">
+						<i class="icon-tasks"></i> <span class="text">Détails du contact</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li ng-class="{'active submenu open':SideBarshow==4}">
+			<a ng-click="getSideBar(4)" >
+				<i class="icon-shopping-cart"></i> <span class="text">Gestion des Paniers</span>
+				<span class="label label-important">2</span>
+			</a>
+			<ul>
+				<li ng-class="{'active':SubSideBarshow==44}">
+					<a ui-sref="display_manage_paniers" ng-click="getSubSideBar(4,44)">
+						<i class="icon-plus"></i> <span class="text">Ajouter un panier</span>
+					</a>
+				</li>
+				<li ng-class="{'active':SubSideBarshow==444}">
+					<a ui-sref="display_details_panier" ng-click="getSubSideBar(4,444)">
+						<i class="icon-tasks"></i> <span class="text">Détails du panier</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li ng-class="{'active submenu open':SideBarshow==5}">
+			<a ng-click="getSideBar(5)">
+				<i class="icon-key"></i> <span class="text">Gestion des Produits</span>
+				<span class="label label-important">2</span>
+			</a>
+			<ul>
+				<li ng-class="{'active':SubSideBarshow==55}">
+					<a ui-sref="display_manage_produits" ng-click="getSubSideBar(5,55)">
+						<i class="icon-plus"></i> <span class="text">Ajouter un produit</span>
+					</a>
+				</li>
+				<li ng-class="{'active':SubSideBarshow==555}">
+					<a ui-sref="display_details_produit" ng-click="getSubSideBar(5,555)">
+						<i class="icon-tasks"></i> <span class="text">Détails du produit</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li ng-class="{'active submenu open':SideBarshow==6}">
+			<a ng-click="getSideBar(6)">
+				<i class="icon-dashboard"></i> <span class="text">Administration</span>
+				<span class="label label-important">3</span>
+			</a>
+			<ul>
+				<li ng-class="{'active':SubSideBarshow==66}">
+					<a ng-click="getSubSideBar(6,66)">
+						<i class="icon-user-md"></i> <span class="text">Utilisateurs</span>
+					</a>
+				</li>
+				<li ng-class="{'active':SubSideBarshow==666}">
+					<a ng-click="getSubSideBar(6,666)">
+						<i class="icon-pushpin"></i> <span class="text">Roles</span>
+					</a>
+				</li>
+				<li ng-class="{'active':SubSideBarshow==6666}">
+					<a ng-click="getSubSideBar(6,6666)">
+						<i class="icon-lock"></i> <span class="text">Privileges</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li ng-class="{'active':SideBarshow==7}">
+			<a ng-click="getSideBar(7)">
+				<i class="icon-signal"></i> <span class="text">Statistiques</span>
+			</a>
+		</li>
+		<li ng-class="{'active':SideBarshow==8}">
+			<a ng-click="getSideBar(8)">
+				<i class="icon-cog"></i> <span class="text">configuration</span>
+			</a>
+		</li>
+	</ul>
+</div>

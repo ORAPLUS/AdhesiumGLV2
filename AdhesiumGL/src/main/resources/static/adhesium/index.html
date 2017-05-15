@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Adhesium Technologies</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/matrix-style.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/matrix-media.css" rel="stylesheet" type="text/css"/>
+	<link href="../font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" href="../css/select2.css" />
+	<link href="../css/moncss.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/sweetalert.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/twitter.css" rel="stylesheet" type="text/css"/>
+ <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,800" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" href="../node_modules/ng-dialog/css/ngDialog.min.css">
+	<link rel="stylesheet" href="../node_modules/ng-dialog/css/ngDialog-theme-default.min.css">
+</head>
+<body ng-app="app">
+
+	<!--begin-header-part-->
+	<div ui-view="header"></div>
+	<!--end-header-part-->
+	<!--begin-navbar-menu-->
+	<div ui-view="navbar"></div>
+	<!--end-navbar-menu-->
+	<!--begin-top-search-->
+	<div ui-view="search"></div>
+	<!--end-top-search-->
+	<!--begin-sidebar-menu-->
+	<div ui-view="sidebar"></div>
+	<!--end-sidebar-menu-->
+	<!--begin-main-container-part-->
+	<div ui-view="content"></div>
+	<!--end-main-container-part-->
+	<!--begin-footer-part-->
+	<div ui-view="footer"></div>
+	<!--end-footer-part-->
+	<!--begin-script-matrix-part-->
+	<script src="../node_modules/matrix/excanvas.min.js"></script>
+	<script src="../node_modules/matrix/jquery.min.js"></script>
+	<script src="../node_modules/matrix/jquery.ui.custom.js"></script>
+	<script src="../node_modules/matrix/bootstrap.min.js"></script>
+	<script src="../node_modules/matrix/jquery.flot.min.js"></script>
+	<script src="../node_modules/matrix/jquery.flot.resize.min.js"></script>
+	<script src="../node_modules/matrix/jquery.peity.min.js"></script>
+	<script src="../node_modules/matrix/matrix.js"></script>
+	<script src="../node_modules/matrix/jquery.gritter.min.js"></script>
+	<script src="../node_modules/matrix/jquery.wizard.js"></script>
+	<script src="../node_modules/matrix/select2.min.js"></script>
+	<script src="../node_modules/matrix/matrix.popover.js"></script>
+	<!--end-script-matrix-part-->
+	<!--begin-script-app-angularJS-part-->
+	<script src="../node_modules/angular/angular.min.js"></script>
+	<script src="../node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+	<script src="../node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script src="../node_modules/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="../node_modules/ng-img-crop/compile/unminified/ng-img-crop.js"></script>
+	<script src="../node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
+	<script src="../node_modules/ng-dialog/js/ngDialog.min.js"></script>
+	<!--end-script-app-angularJS-part-->
+	<!--begin-MY-script-app-part-->
+	<script src="../js/app.js"></script>
+	<script src="../js/services.js"></script>
+	<script src="../js/directives.js"></script>
+	<script src="../js/controllers.js"></script>
+	<script src="pck_views/controllers/sidebarController.js"></script>
+	<script src="pck_views/controllers/accueilController.js"></script>
+	<script src="pck_clients/controllers/manageClientsController.js"></script>
+	<script src="pck_clients/controllers/detailsClientController.js"></script>
+	<script src="pck_clients/directives/clientDirectives.js"></script>
+	<script src="pck_produits/controllers/manageProduitsController.js"></script>
+	<script src="pck_produits/controllers/detailsProduitController.js"></script>
+	<script src="pck_contacts/controllers/manageContactsController.js"></script>
+	<script src="pck_contacts/controllers/detailsContactController.js"></script>
+	<script src="pck_paniers/controllers/managePaniersController.js"></script>
+	<script src="pck_paniers/controllers/detailsPanierController.js"></script>
+	<!--end-MY-script-app-part-->
+</body>
+</html>

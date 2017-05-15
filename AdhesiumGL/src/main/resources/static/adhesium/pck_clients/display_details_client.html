@@ -1,0 +1,133 @@
+<!--main-container-part-->
+<div id="content">
+<!--breadcrumbs-->
+ <div id="content-header">
+    <div id="breadcrumb"> 
+	    <a href="#" title="Accueil" class="tip-bottom"><i class="icon-home"></i> Accueil</a> 
+	    <a href="#">Détails du client</a> <a href="#" class="current">{{client.nom | uppercase}}</a> 
+    </div>
+  </div>
+  <div class="container-fluid" >
+  <div class="row-fluid">
+				<div class="span12">
+					<div class="widget-box">
+						<div class="widget-title bg_ly" data-toggle="collapse" href="#collapseTwo">
+							<span class="icon"><i class="icon-search"></i></span>
+							<h5>Rechercher</h5>
+						</div>
+						<div class="widget-content nopadding" id="collapseTwo" >
+							<form class="form-horizontal">
+								<client-directives></client-directives>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box" ng-show="showModal">
+          <div class="widget-title"> <span class="icon"> <i class="icon-briefcase"></i> </span>
+            <h5 >Client n° {{client.idClient}}: {{client.nom | uppercase}}</h5>
+          </div>
+          <div class="widget-content">
+            <div class="row-fluid">
+              <div class="span6">
+                <table class="">
+                  <tbody>
+                  <tr>
+                  <td class="uploadfilediv">
+					<img src="{{linkXampp+client.logo}}"  width="128" height="128" alt="logo" title="logo"/>
+					
+                  </td>
+                  </tr>
+                    <tr>
+                      <td><h4> {{client.nom | uppercase}}</h4></td>
+                    </tr>
+                    <tr>
+                      <td><i class="icon-phone"></i> Téléphone Portable: {{client.telPortable}}</td>
+                    </tr>
+                    <tr>
+                      <td><i class="icon-phone-sign"></i> Téléphone Fixe: {{client.telFixe}}</td>
+                    </tr>
+                    <tr>
+                      <td ><i class="icon-envelope-alt"></i> Email: {{client.email}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <br/><br/>
+              <div class="span6">
+                <table class="table table-bordered table-invoice">
+                  <tbody>
+                    <tr>
+                    <tr>
+                      <td class="width30">ID:</td>
+                      <td class="width70"><strong>ADH-{{client.idClient}}</strong></td>
+                    </tr>
+                    <tr>
+                      <td>Créé par: </td>
+                      <td><strong>March 23, 2013</strong></td>
+                    </tr>
+                    <tr>
+                      <td>Date création:</td>
+                      <td><strong>April 01, 2013</strong></td>
+                    </tr>
+                  <td class="width30">Adresse:</td>
+                    <td class="width70"><strong>{{client.nom | uppercase}}.</strong> <br>
+                      501 Mafia Street., washington, NYNC 3654
+                  </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+            <br/>
+            <div class="row-fluid">
+              <div class="span12">
+                <table class="table table-bordered table-invoice-full">
+                  <thead>
+                    <tr>
+                      <th class="head0">ID</th>
+                      <th class="head0">Nom et Prénom</th>
+                      <th class="head0">Tél Portable</th>
+                      <th class="head0 right">Tél Fixe</th>
+                      <th class="head0 right">Email</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  	<tr ng-repeat="contact in contacts">
+                      <td>{{contact.idContact}}</td>
+                      <td>{{contact.nom}}</td>
+                      <td class="right">{{contact.telPortable}}</td>
+                      <td class="right">{{contact.telFixe}}</td>
+                      <td class="right">{{contact.email}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table table-bordered table-invoice-full">
+                  <tbody>
+                    <tr>
+                      <td class="msg-invoice" width="85%"><h4>Remarque: </h4>
+						<p>{{client.remarque}}</p>
+					  </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table table-bordered table-invoice-full">
+                  <tbody>
+                    <tr>
+                      <td class="msg-invoice" width="85%"><h4>Commentaire: </h4>
+						<p>{{client.commentaire}}</p>
+					  </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--end-container-part-->
+</div>
+<!--end-main-container-part-->
